@@ -1,10 +1,9 @@
 let express = require('express');
+let path = require('path');
 let app = express();
 console.log("Hello World");
-// app.get("/", (req, res) => res.send("Hello Express"))
-
-console.log(__dirname + "/views/index.html");
-app.get("/", (req, res) => res.sendFile(__dirname + "/views/index.html"))
+app.use("/public", express.static(path.join(__dirname , "public")))
+app.get("/", (req, res) => res.sendFile(path.join(__dirname,"views","index.html")))
 
 
 
