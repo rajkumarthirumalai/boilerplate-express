@@ -20,16 +20,28 @@ app.get(
     (req, res, next) => { req.time = new Date().toString(); next(); },
     (req, res) => { console.log(req.time); res.json({ time: req.time }) }
 )
-app.get("/:word/echo", 
+app.get("/:word/echo",
     (req, res, next) => {
-    if (req.params.word) {
-        req.word = req.params.word;
-        next();
-    }
+        if (req.params.word) {
+            req.word = req.params.word;
+            next();
+        }
     },
-    (req,res) =>res.json({echo:req.word})
+    (req, res) => res.json({ echo: req.word })
 )
-
+app.get("/name",
+    (req, res) => {
+        console.log(req.query);
+        const firstName = req.query.first;
+        const lastName = req.query.last;
+        res.json({ name: `${firstName} ${lastName}` });
+    }
+).post((req, res) => {
+    const firstName = req.query.first;
+    const lastName = req.query.last;
+    res.json({ name: `${firstName} ${lastName}` });
+}
+)
 
 
 
