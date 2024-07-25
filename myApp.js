@@ -17,10 +17,18 @@ app.get("/json", (req, res) => {
 })
 app.get(
     "/now",
-     (req, res, next) => { req.time = new Date().toString(); next(); },
-     (req, res) => {console.log(req.time); res.json({time:req.time})}
-    )
-
+    (req, res, next) => { req.time = new Date().toString(); next(); },
+    (req, res) => { console.log(req.time); res.json({ time: req.time }) }
+)
+app.get("/:word/echo", 
+    (req, res, next) => {
+    if (req.params.word) {
+        req.word = req.params.word;
+        next();
+    }
+    },
+    (req,res) =>res.json({echo:req.word})
+)
 
 
 
